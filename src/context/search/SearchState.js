@@ -19,7 +19,7 @@ const SearchState = (props) => {
     };
     try {
       const res = await axios.get(
-        'https://api.spotify.com/v1/search?Muse&type=track',
+        '/api/search?q=Muse&type=track&limit=10',
         {},
         config
       );
