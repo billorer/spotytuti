@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+import config from './config.json';
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
-const clientId = '54fad05207f743d2b90e188ac639e837';
-const redirectUri = 'http://localhost:3000/redirect';
-const scopes = ['user-read-currently-playing', 'user-read-playback-state'];
 
 // Get the hash of the url
 const hash = window.location.hash
@@ -45,7 +43,9 @@ class App extends Component {
           {!this.state.token && (
             <a
               className='btn btn--loginApp-link'
-              href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
+              href={`${authEndpoint}?client_id=${
+                config.clientId
+              }&redirect_uri=${config.redirectUri}&scope=${config.scopes.join(
                 '%20'
               )}&response_type=token&show_dialog=true`}
             >

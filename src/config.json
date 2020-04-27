@@ -1,0 +1,5 @@
+{
+  "clientId": "54fad05207f743d2b90e188ac639e837",
+  "redirectUri": "http://localhost:3000/redirect",
+  "scopes": ["user-read-currently-playing", "user-read-playback-state"]
+}
