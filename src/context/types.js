@@ -1,0 +1,2 @@
+export const AUTHORIZE = 'AUTHORIZE';
+export const AUTHORIZE_FAIL = 'AUTHORIZE_FAIL';

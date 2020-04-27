@@ -1,62 +1,41 @@
-import React, { Component } from 'react';
+import React, { Fragment } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from 'react-router-dom';
 import './App.css';
-import config from './config.json';
-export const authEndpoint = 'https://accounts.spotify.com/authorize';
+import AuthState from './context/auth/AuthState';
 
-// Get the hash of the url
-const hash = window.location.hash
-  .substring(1)
-  .split('&')
-  .reduce(function (initial, item) {
-    if (item) {
-      var parts = item.split('=');
-      initial[parts[0]] = decodeURIComponent(parts[1]);
-    }
-    return initial;
-  }, {});
-window.location.hash = '';
+import PrivateRoute from './components/PrivateRoute';
+import Home from './components/pages/Home';
+import Authenticate from './components/pages/Authenticate';
+// import About from './components/pages/About';
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      token: null,
-    };
-  }
-  componentDidMount() {
-    // Set token
-    let _token = hash.access_token;
+import setAuthToken from './utils/setAuthToken';
 
-    if (_token) {
-      // Set token
-      this.setState({
-        token: _token,
-      });
-      console.log(_token);
-    }
-  }
-
-  render() {
-    return (
-      <div className='App'>
-        <header className='App-header'>
-          {!this.state.token && (
-            <a
-              className='btn btn--loginApp-link'
-              href={`${authEndpoint}?client_id=${
-                config.clientId
-              }&redirect_uri=${config.redirectUri}&scope=${config.scopes.join(
-                '%20'
-              )}&response_type=token&show_dialog=true`}
-            >
-              Login to Spotify
-            </a>
-          )}
-          {this.state.token && <h1>Got the token!</h1>}
-        </header>
-      </div>
-    );
-  }
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
 }
+
+const App = () => {
+  return (
+    <AuthState>
+      <Router>
+        <Fragment>
+          <div className='container'>
+            <Switch>
+              <PrivateRoute exact path='/' component={Home} />
+              <Route exact path='/home' component={Home} />
+              <Route exact path='/authenticate' component={Authenticate} />
+              <Redirect to='/' />
+            </Switch>
+          </div>
+        </Fragment>
+      </Router>
+    </AuthState>
+  );
+};
 
 export default App;
