@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import config from './config.json';
+import config from '../config.json';
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 
 // Get the hash of the url
