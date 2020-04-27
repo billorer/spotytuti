@@ -7,11 +7,13 @@ import {
 } from 'react-router-dom';
 import './App.css';
 import AuthState from './context/auth/AuthState';
+import SearchState from './context/search/SearchState';
 
 import PrivateRoute from './components/PrivateRoute';
 import Home from './components/pages/Home';
 import Authenticate from './components/pages/Authenticate';
 // import About from './components/pages/About';
+import Search from './components/pages/Search';
 
 import setAuthToken from './utils/setAuthToken';
 
@@ -22,18 +24,21 @@ if (localStorage.token) {
 const App = () => {
   return (
     <AuthState>
-      <Router>
-        <Fragment>
-          <div className='container'>
-            <Switch>
-              <PrivateRoute exact path='/' component={Home} />
-              <Route exact path='/home' component={Home} />
-              <Route exact path='/authenticate' component={Authenticate} />
-              <Redirect to='/' />
-            </Switch>
-          </div>
-        </Fragment>
-      </Router>
+      <SearchState>
+        <Router>
+          <Fragment>
+            <div className='container'>
+              <Switch>
+                <PrivateRoute exact path='/' component={Home} />
+                <Route exact path='/home' component={Home} />
+                <Route exact path='/authenticate' component={Authenticate} />
+                <Route exact path='/search' component={Search} />
+                <Redirect to='/' />
+              </Switch>
+            </div>
+          </Fragment>
+        </Router>
+      </SearchState>
     </AuthState>
   );
 };
