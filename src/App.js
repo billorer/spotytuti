@@ -21,6 +21,7 @@ import setAuthToken from './utils/setAuthToken';
 import 'materialize-css/dist/css/materialize.min.css';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import Navbar from './components/layout/Navbar';
+import ProfileState from './context/profile/ProfileState';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -43,7 +44,9 @@ const App = () => {
                 <Route exact path='/authenticate' component={Authenticate} />
                 <Route exact path='/about' component={About} />
                 <PrivateRoute exact path='/search' component={Search} />
-                <Route exact path='/profile' component={Profile} />
+                <ProfileState>
+                  <Route exact path='/profile' component={Profile} />
+                </ProfileState>
                 <Redirect to='/' />
               </Switch>
             </div>
