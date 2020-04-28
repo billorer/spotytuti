@@ -7,6 +7,7 @@ import { SEARCH_SUCCESS, SEARCH_FAIL } from '../types';
 const SearchState = (props) => {
   const initialState = {
     items: null,
+    selectedType: '',
   };
 
   const [state, dispatch] = useReducer(searchReducer, initialState);
@@ -25,8 +26,10 @@ const SearchState = (props) => {
       );
       console.log(res);
       console.log(res.data[`${type}s`].items);
-      console.log(res.data[`${type}s`].items[0].name);
-      dispatch({ type: SEARCH_SUCCESS, payload: res.data[`${type}s`].items });
+      dispatch({
+        type: SEARCH_SUCCESS,
+        payload: { items: res.data[`${type}s`].items, type },
+      });
     } catch (error) {
       dispatch({ type: SEARCH_FAIL });
     }
@@ -36,6 +39,7 @@ const SearchState = (props) => {
     <SearchContext.Provider
       value={{
         items: state.items,
+        selectedType: state.selectedType,
         search,
       }}
     >

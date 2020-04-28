@@ -1,5 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
-import SearchContext from '../../context/search/searchContext';
+import React, { useContext, useState } from 'react';
+import SearchContext from '../../../context/search/searchContext';
+
+import types from './types';
+import Tables from './Tables';
 
 import M from 'materialize-css/dist/js/materialize.min.js';
 
@@ -10,7 +13,7 @@ const Search = () => {
 
   const searchContext = useContext(SearchContext);
 
-  const { search, items } = searchContext;
+  const { search, items, selectedType } = searchContext;
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -46,9 +49,9 @@ const Search = () => {
             <option value='' disabled>
               Choose type
             </option>
-            <option value='track'>Track</option>
-            <option value='artist'>Artist</option>
-            <option value='album'>Album</option>
+            <option value={types.track}>Track</option>
+            <option value={types.artist}>Artist</option>
+            <option value={types.album}>Album</option>
           </select>
         </div>
         <div className='input-field'>
@@ -70,20 +73,7 @@ const Search = () => {
           />
         </div>
       </form>
-      {items && (
-        <div>
-          <ul className='collection'>
-            <li className='collection-header'>
-              <h4>{type.toUpperCase()} NAMES:</h4>
-            </li>
-            {items.map((t) => (
-              <li key={t.id} value={t.name} className='collection-item'>
-                {t.name}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      {items && <Tables selectedType={selectedType} items={items}></Tables>}
     </div>
   );
 };

@@ -13,7 +13,7 @@ import PrivateRoute from './components/PrivateRoute';
 import Home from './components/pages/Home';
 import Authenticate from './components/pages/Authenticate';
 import About from './components/pages/About';
-import Search from './components/pages/Search';
+import Search from './components/pages/Search/Search';
 import Profile from './components/pages/Profile';
 
 import setAuthToken from './utils/setAuthToken';
