@@ -2,10 +2,12 @@ import React, { Fragment } from 'react';
 
 const About = () => {
   return (
-    <Fragment>
-      <h2>This is a react project for starters</h2>
-      <h5>Using Spotify</h5>
-    </Fragment>
+    <div className='container valign-wrapper' style={{ height: '800px' }}>
+      <div className='row valign'>
+        <h3 className='col s12 center'>This is a react project for starters</h3>
+        <h5 className='col s12 center grey-text'>Using Spotify</h5>
+      </div>
+    </div>
   );
 };
 

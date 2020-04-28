@@ -5,7 +5,7 @@ export default (state, action) => {
     case SEARCH_SUCCESS:
       return {
         ...state,
-        items: [action.payload.items],
+        items: action.payload,
       };
     case SEARCH_FAIL:
       return {
