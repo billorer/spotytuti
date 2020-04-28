@@ -1,16 +1,16 @@
-import { SEARCH_SUCCESS, SEARCH_FAIL } from '../types';
+import { PROFILE_SUCCESS, PROFILE_FAIL } from '../types';
 
 export default (state, action) => {
     switch (action.type) {
-        case SEARCH_SUCCESS:
+        case PROFILE_SUCCESS:
             return {
                 ...state,
-                items: [action.payload.items]
+                profileData: action.payload
             };
-        case SEARCH_FAIL:
+        case PROFILE_FAIL:
             return {
                 ...state,
-                items: null
+                profileData: null
             };
         default:
             return state;

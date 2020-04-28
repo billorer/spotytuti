@@ -45,7 +45,7 @@ const App = () => {
                 <Route exact path='/about' component={About} />
                 <PrivateRoute exact path='/search' component={Search} />
                 <ProfileState>
-                  <Route exact path='/profile' component={Profile} />
+                  <PrivateRoute exact path='/profile' component={Profile} />
                 </ProfileState>
                 <Redirect to='/' />
               </Switch>

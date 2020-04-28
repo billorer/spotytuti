@@ -33,6 +33,9 @@ const Navbar = () => {
           <span className='hide-sm'>Logout</span>
         </a>
       </li>
+      <li>
+        <Link to='/profile'>Profile</Link>
+      </li>
     </Fragment>
   );
 
