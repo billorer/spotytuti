@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 
-import Track from './Track';
-import Artist from './Artist';
-import Album from './Album';
+import Track from './tables/Track';
+import Artist from './tables/Artist';
+import Album from './tables/Album';
 
 import types from './types';
 
