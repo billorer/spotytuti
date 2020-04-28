@@ -8,7 +8,17 @@ const Search = () => {
     // eslint-disable-next-line
   }, []);
 
-  return <h1>Search</h1>;
+  return (
+    <div className='row'>
+      <form className='col s12'>
+        <div className='input-field'>
+          <input id='search' type='text' className='validate' />
+          <label for='search'>Search</label>
+        </div>
+        <input type='submit' value='Search' className='btn' />
+      </form>
+    </div>
+  );
 };
 
 export default Search;
