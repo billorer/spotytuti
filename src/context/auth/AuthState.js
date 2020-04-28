@@ -2,30 +2,46 @@ import React, { useReducer } from 'react';
 import AuthContext from './authContext';
 import authReducer from './authReducer';
 import { AUTHORIZE, AUTHORIZE_FAIL } from '../types';
-import hash from '../../utils/hash';
 import setAuthToken from '../../utils/setAuthToken';
+import axios from 'axios';
+import config from '../../config.json';
+import qs from 'qs';
 
 const AuthState = (props) => {
+  const token = localStorage.getItem('token');
   const initialState = {
-    token: localStorage.getItem('token'),
-    isAuthenticated: null,
+    token,
+    isAuthenticated: token ? true : null,
   };
 
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  const authorize = () => {
-    const token = hash.access_token;
+  const authorize = async () => {
+    const headers = {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      auth: {
+        username: config.clientId,
+        password: config.clientSecret,
+      },
+    };
+    const data = {
+      grant_type: 'client_credentials',
+    };
 
-    if (token !== null && token !== undefined && token !== '') {
-      setAuthToken(localStorage.token);
-      dispatch({
-        type: AUTHORIZE,
-        payload: token,
-      });
-    } else {
-      dispatch({
-        type: AUTHORIZE_FAIL,
-      });
+    try {
+      const response = await axios.post(
+        'https://accounts.spotify.com/api/token',
+        qs.stringify(data),
+        headers
+      );
+      const token = response.data.access_token;
+      setAuthToken(token);
+      dispatch({ type: AUTHORIZE, payload: token });
+    } catch (error) {
+      dispatch({ type: AUTHORIZE_FAIL });
     }
   };
 
