@@ -14,6 +14,7 @@ import Home from './components/pages/Home';
 import Authenticate from './components/pages/Authenticate';
 // import About from './components/pages/About';
 import Search from './components/pages/Search';
+import Profile from './components/pages/Profile';
 
 import setAuthToken from './utils/setAuthToken';
 
@@ -33,6 +34,7 @@ const App = () => {
                 <Route exact path='/home' component={Home} />
                 <Route exact path='/authenticate' component={Authenticate} />
                 <Route exact path='/search' component={Search} />
+                <Route exact path='/profile' component={Profile} />
                 <Redirect to='/' />
               </Switch>
             </div>
