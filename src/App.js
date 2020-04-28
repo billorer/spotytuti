@@ -30,9 +30,8 @@ const App = () => {
             <div className='container'>
               <Switch>
                 <PrivateRoute exact path='/' component={Home} />
-                <Route exact path='/home' component={Home} />
                 <Route exact path='/authenticate' component={Authenticate} />
-                <Route exact path='/search' component={Search} />
+                <PrivateRoute exact path='/search' component={Search} />
                 <Redirect to='/' />
               </Switch>
             </div>
