@@ -4,7 +4,6 @@ export default (state, action) => {
   switch (action.type) {
     case AUTHORIZE:
       localStorage.setItem('token', action.payload);
-      window.location.hash = '';
       return {
         ...state,
         token: action.payload,
