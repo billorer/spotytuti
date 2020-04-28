@@ -2,11 +2,11 @@ import React, { useReducer } from 'react';
 import axios from 'axios';
 import profileReducer from './profileReducer';
 import ProfileContext from './profileContext';
-import { SEARCH_SUCCESS } from '../types';
+import { PROFILE_SUCCESS, PROFILE_FAIL } from '../types';
 
 const ProfileState = props => {
     const initialState = {
-        items: null
+        profileData: null
     };
 
     const [state, dispatch] = useReducer(profileReducer, initialState);
@@ -20,16 +20,16 @@ const ProfileState = props => {
         try {
             const res = await axios.get('/api/me', {}, config);
             console.log(res);
-            // dispatch({ type: SEARCH_SUCCESS, payload: res.data });
+            dispatch({ type: PROFILE_SUCCESS, payload: res.data });
         } catch (error) {
-            // dispatch({ type: SEARCH_FAIL });
+            dispatch({ type: PROFILE_FAIL });
         }
     };
 
     return (
         <ProfileContext.Provider
             value={{
-                items: state.items,
+                profileData: state.profileData,
                 profile
             }}
         >
