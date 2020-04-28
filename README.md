@@ -2,12 +2,12 @@
 
 ### Using Spotify
 
-SpotiTuti is a small project for react starters.
+SpotyTuti is a small project for react starters.
 
 ## Installation
 
 - You have to create a user at spotify and connect to [spotify developer](https://developer.spotify.com/dashboard/login)
-- You have to create a little project on after logging in at the site mentioned above
+- You have to create a little project after logging in at the site mentioned above
 - You have to create a config.json in the projects /src folder with the following format
 
 ```

@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import AuthContext from './authContext';
 import authReducer from './authReducer';
-import { AUTHORIZE, AUTHORIZE_FAIL } from '../types';
+import { AUTHORIZE, AUTHORIZE_FAIL, LOGOUT } from '../types';
 import setAuthToken from '../../utils/setAuthToken';
 import axios from 'axios';
 import config from '../../config.json';
@@ -15,6 +15,10 @@ const AuthState = (props) => {
   };
 
   const [state, dispatch] = useReducer(authReducer, initialState);
+
+  const logout = () => {
+    dispatch({ type: LOGOUT });
+  };
 
   const authorize = async () => {
     const headers = {
@@ -51,6 +55,7 @@ const AuthState = (props) => {
         token: state.token,
         isAuthenticated: state.isAuthenticated,
         authorize,
+        logout,
       }}
     >
       {props.children}
