@@ -20,6 +20,9 @@ const Navbar = () => {
         <Link to='/'>Home</Link>
       </li>
       <li>
+        <Link to='/profile'>Profile</Link>
+      </li>
+      <li>
         <Link to='/about'>About</Link>
       </li>
       <li>
@@ -32,9 +35,6 @@ const Navbar = () => {
           <i className='material-icons left'>exit_to_app</i>
           <span className='hide-sm'>Logout</span>
         </a>
-      </li>
-      <li>
-        <Link to='/profile'>Profile</Link>
       </li>
     </Fragment>
   );
