@@ -10,6 +10,9 @@ const Search = () => {
   const [text, setText] = useState('');
   const [type, setType] = useState('');
   const [limit, setLimit] = useState(10);
+  const [offset, setOffset] = useState(0);
+  const [pageLimit, setPageLimit] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const searchContext = useContext(SearchContext);
 
@@ -18,11 +21,31 @@ const Search = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (text === '' || type === '') {
+    if (text === '' || type === '' || limit > 50 || limit <= 0) {
       M.toast({ html: 'Please enter the required fields' });
     } else {
-      search(text, type, limit);
+      setCurrentPage(1);
+      setOffset(0);
+      search(text, type, limit, offset);
     }
+  };
+
+  const previousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+      setOffset(offset - pageLimit);
+    }
+  };
+
+  const nextPage = () => {
+    if (currentPage < getMaxPageLimit()) {
+      setCurrentPage(currentPage + 1);
+      setOffset(offset + pageLimit);
+    }
+  };
+
+  const getMaxPageLimit = () => {
+    return Math.ceil(items.length / pageLimit);
   };
 
   return (
@@ -55,6 +78,7 @@ const Search = () => {
               <option value={types.artist}>Artist</option>
               <option value={types.album}>Album</option>
             </select>
+            <label>Select type</label>
           </div>
           <div className='input-field'>
             <input
@@ -63,8 +87,29 @@ const Search = () => {
               className='validate'
               placeholder='Limit...'
               value={limit}
+              min='1'
+              max='50'
               onChange={(e) => setLimit(e.target.value)}
             />
+            <label htmlFor='limit'>Select item limit (max 50)</label>
+          </div>
+          <div className='input-field'>
+            <select
+              className='validate'
+              value={pageLimit}
+              onChange={(e) => setPageLimit(e.target.value)}
+              required
+            >
+              <option value='' disabled>
+                Select page limit
+              </option>
+              <option value={10}>10</option>
+              <option value={20}>20</option>
+              <option value={30}>30</option>
+              <option value={40}>40</option>
+              <option value={50}>50</option>
+            </select>
+            <label>Select page limit</label>
           </div>
           <div className='input-field'>
             <input
@@ -78,7 +123,29 @@ const Search = () => {
             </button>
           </div>
         </form>
-        {items && <Tables selectedType={selectedType} items={items}></Tables>}
+        {items && (
+          <Fragment>
+            <div className='row'>
+              <Tables
+                selectedType={selectedType}
+                items={items}
+                pageLimit={pageLimit}
+                offset={offset}
+              ></Tables>
+            </div>
+            <div className='row valign-wrapper'>
+              <button className='btn left col s3 valign' onClick={previousPage}>
+                <i className='material-icons'>chevron_left</i>
+              </button>
+              <div className='center col s6 valign'>
+                {currentPage} / {getMaxPageLimit()}
+              </div>
+              <button className='btn right col s3 valign' onClick={nextPage}>
+                <i className='material-icons'>chevron_right</i>
+              </button>
+            </div>
+          </Fragment>
+        )}
       </div>
     </Fragment>
   );

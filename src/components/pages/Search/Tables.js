@@ -7,14 +7,19 @@ import Album from './tables/Album';
 import types from './types';
 
 const Tables = (props) => {
-  const { items, selectedType } = props;
+  const { items, selectedType, pageLimit, offset } = props;
+
+  const filteredItems = items.filter(
+    (item, index) => index >= offset && index < offset + pageLimit
+  );
+
   switch (selectedType) {
     case types.track:
-      return <Track items={items}></Track>;
+      return <Track items={filteredItems}></Track>;
     case types.album:
-      return <Album items={items}></Album>;
+      return <Album items={filteredItems}></Album>;
     case types.artist:
-      return <Artist items={items}></Artist>;
+      return <Artist items={filteredItems}></Artist>;
     default:
       return (
         <Fragment>

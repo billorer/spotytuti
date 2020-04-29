@@ -12,7 +12,7 @@ const SearchState = (props) => {
 
   const [state, dispatch] = useReducer(searchReducer, initialState);
 
-  const search = async (text, type, limit = 10) => {
+  const search = async (text, type, limit = 10, offset = 0) => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -20,7 +20,7 @@ const SearchState = (props) => {
     };
     try {
       const res = await axios.get(
-        `/api/search?q=${text}&type=${type}&limit=${limit}`,
+        `/api/search?q=${text}&type=${type}&limit=${limit}&offset=${0}`,
         {},
         config
       );
