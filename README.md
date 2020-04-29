@@ -14,8 +14,8 @@ SpotyTuti is a small project for react starters.
   {
     "clientId": "YOUR_CLIENT_ID",
     "clientSecret": "YOUR_CLIENT_SECRET",
-    "redirectUri": "URL EX." => "http://localhost:3000/",
-    "scopes": "SCOPES AIMED AT THE TOKEN REQUEST EX." => ["user-read-currently-playing", "user-read-playback-state"]
+    "redirectUri": "http://YOUR_DOMAIN/authenticate",
+    "scopes": "SCOPES AIMED AT THE TOKEN REQUEST EX." => ["user-read-private", "user-read-email"]
   }
 ```
 

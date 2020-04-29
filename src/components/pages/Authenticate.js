@@ -18,7 +18,7 @@ const Authenticate = (props) => {
     if (isAuthenticated) {
       props.history.push('/');
     }
-  }, [setAccessToken, isAuthenticated, props.history]);
+  }, [access_token, setAccessToken, isAuthenticated, props.history]);
 
   const getspotifytoken = () => {
     authContext.authorize();

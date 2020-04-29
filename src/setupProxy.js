@@ -10,14 +10,4 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
-  // app.use(
-  //   '/auth',
-  //   createProxyMiddleware({
-  //     target: 'https://accounts.spotify.com/',
-  //     pathRewrite: {
-  //       '/auth': '',
-  //     },
-  //     changeOrigin: true,
-  //   })
-  // );
 };
