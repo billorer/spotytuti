@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, Fragment } from 'react';
+import React, { useContext, useEffect } from 'react';
 import ProfileContext from '../../context/profile/profileContext';
 
 const Profile = () => {
   const profileContext = useContext(ProfileContext);
-
   const profile = { ...profileContext.profileData };
 
   useEffect(() => {
@@ -16,7 +15,7 @@ const Profile = () => {
       <div className='row valign-wrapper'>
         <div className='col s3'>
           <img
-            src={profile.images[0].url}
+            src={profile.images[0] && profile.images[0].url}
             alt={profile.display_name}
             className='circle responsive-img'
           />

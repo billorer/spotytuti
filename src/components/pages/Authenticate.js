@@ -6,7 +6,11 @@ const Authenticate = (props) => {
   const authContext = useContext(AuthContext);
   const { access_token, isAuthenticated, setAccessToken } = authContext;
   useEffect(() => {
-    if (window.location.href.includes('code=') && !isAuthenticated) {
+    if (
+      window.location.href.includes('code=') &&
+      !isAuthenticated &&
+      !access_token
+    ) {
       const code = window.location.href.split('code=')[1];
       setAccessToken(code);
     }
@@ -39,7 +43,7 @@ const Authenticate = (props) => {
                 '%20'
               )}&response_type=code&show_dialog=true`}
             >
-              Authorize
+              Authorize at Spotify
             </a>
           )}
         </div>

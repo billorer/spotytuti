@@ -11,16 +11,20 @@ export default (state, action) => {
       };
     case AUTHORIZE_FAIL:
       localStorage.removeItem('token');
+      localStorage.removeItem('access_token');
       return {
         ...state,
         token: null,
+        access_token: null,
         isAuthenticated: false,
       };
     case LOGOUT:
       localStorage.removeItem('token');
+      localStorage.removeItem('access_token');
       return {
         ...state,
         token: null,
+        access_token: null,
         isAuthenticated: false,
       };
     case ACCESS_TOKEN:
