@@ -15,6 +15,7 @@ import Authenticate from './components/pages/Authenticate';
 import About from './components/pages/About';
 import Search from './components/pages/Search/Search';
 import Profile from './components/pages/Profile';
+import ArtistDetail from './components/pages/ArtistDetail';
 
 import setAuthToken from './utils/setAuthToken';
 
@@ -22,6 +23,7 @@ import 'materialize-css/dist/css/materialize.min.css';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import Navbar from './components/layout/Navbar';
 import ProfileState from './context/profile/ProfileState';
+import ArtistDetailState from './context/artistDetail/ArtistDetailState';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -44,6 +46,9 @@ const App = () => {
                 <Route exact path='/authenticate' component={Authenticate} />
                 <Route exact path='/about' component={About} />
                 <PrivateRoute exact path='/search' component={Search} />
+                <ArtistDetailState>
+                  <PrivateRoute exact path='/artist/:artistId' component={ArtistDetail} />
+                </ArtistDetailState>
                 <ProfileState>
                   <PrivateRoute exact path='/profile' component={Profile} />
                 </ProfileState>
