@@ -6,6 +6,7 @@ const ArtistDetail = props => {
   const artistId = props.match.params.artistId;
   const artist = { ...artistDetailContext.artistData };
   console.log(artistId);
+  console.log('artistdetail context', artistDetailContext);
 
   useEffect(() => {
     artistDetailContext.artist(artistId);
@@ -13,7 +14,12 @@ const ArtistDetail = props => {
   }, []);
 
   return (
-    <h3>im the artist detail</h3>
+    artistDetailContext.artistData && (
+      <div>
+        {artist.name && <p>artist name: {artist.name}</p>}
+      </div>
+      
+    )
   );
 };
 
