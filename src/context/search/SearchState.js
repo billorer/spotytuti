@@ -24,8 +24,6 @@ const SearchState = (props) => {
         {},
         config
       );
-      // console.log(res);
-      // console.log(res.data[`${type}s`].items);
       dispatch({
         type: SEARCH_SUCCESS,
         payload: { items: res.data[`${type}s`].items, type },

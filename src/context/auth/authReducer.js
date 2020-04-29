@@ -1,4 +1,4 @@
-import { AUTHORIZE_FAIL, AUTHORIZE, LOGOUT } from '../types';
+import { AUTHORIZE_FAIL, AUTHORIZE, LOGOUT, ACCESS_TOKEN } from '../types';
 
 export default (state, action) => {
   switch (action.type) {
@@ -22,6 +22,12 @@ export default (state, action) => {
         ...state,
         token: null,
         isAuthenticated: false,
+      };
+    case ACCESS_TOKEN:
+      localStorage.setItem('access_token', action.payload);
+      return {
+        ...state,
+        access_token: action.payload,
       };
     default:
       return state;

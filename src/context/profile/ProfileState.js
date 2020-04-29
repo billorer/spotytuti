@@ -12,14 +12,8 @@ const ProfileState = (props) => {
   const [state, dispatch] = useReducer(profileReducer, initialState);
 
   const profile = async () => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
     try {
-      const res = await axios.get('/api/me', {}, config);
-      console.log(res);
+      const res = await axios.get('/api/me');
       dispatch({ type: PROFILE_SUCCESS, payload: res.data });
     } catch (error) {
       dispatch({ type: PROFILE_FAIL });

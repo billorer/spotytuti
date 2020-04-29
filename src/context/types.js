@@ -6,3 +6,4 @@ export const PROFILE_SUCCESS = 'PROFILE_SUCCESS';
 export const PROFILE_FAIL = 'PROFILE_FAIL';
 export const CLEAR_SEARCH = 'CLEAR_SEARCH';
 export const LOGOUT = 'LOGOUT';
+export const ACCESS_TOKEN = 'ACCESS_TOKEN';

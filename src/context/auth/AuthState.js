@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import AuthContext from './authContext';
 import authReducer from './authReducer';
-import { AUTHORIZE, AUTHORIZE_FAIL, LOGOUT } from '../types';
+import { AUTHORIZE, AUTHORIZE_FAIL, LOGOUT, ACCESS_TOKEN } from '../types';
 import setAuthToken from '../../utils/setAuthToken';
 import axios from 'axios';
 import config from '../../config.json';
@@ -9,8 +9,10 @@ import qs from 'qs';
 
 const AuthState = (props) => {
   const token = localStorage.getItem('token');
+  const access_token = localStorage.getItem('access_token');
   const initialState = {
     token,
+    access_token,
     isAuthenticated: token ? true : null,
   };
 
@@ -18,6 +20,13 @@ const AuthState = (props) => {
 
   const logout = () => {
     dispatch({ type: LOGOUT });
+  };
+
+  const setAccessToken = (token) => {
+    dispatch({
+      type: ACCESS_TOKEN,
+      payload: token,
+    });
   };
 
   const authorize = async () => {
@@ -32,7 +41,10 @@ const AuthState = (props) => {
       },
     };
     const data = {
-      grant_type: 'client_credentials',
+      grant_type: 'authorization_code',
+      redirect_uri: config.redirectUri,
+      code: localStorage.getItem('access_token'),
+      scope: config.scopes.join(' '),
     };
 
     try {
@@ -54,7 +66,9 @@ const AuthState = (props) => {
       value={{
         token: state.token,
         isAuthenticated: state.isAuthenticated,
+        access_token: state.access_token,
         authorize,
+        setAccessToken,
         logout,
       }}
     >
