@@ -4,6 +4,8 @@ import ProfileContext from '../../context/profile/profileContext';
 const Profile = () => {
   const profileContext = useContext(ProfileContext);
 
+  const profile = { ...profileContext.profileData };
+
   useEffect(() => {
     profileContext.profile();
     // eslint-disable-next-line
@@ -14,29 +16,23 @@ const Profile = () => {
       <div className='row valign-wrapper'>
         <div className='col s3'>
           <img
-            src={profileContext.profileData.images[0].url}
-            alt={profileContext.profileData.display_name}
+            src={profile.images[0].url}
+            alt={profile.display_name}
             className='circle responsive-img'
           />
         </div>
         <div className='col s9'>
-          <h1>{profileContext.profileData.display_name}</h1>
+          <h1>{profile.display_name}</h1>
           <p>
             username:&nbsp;
-            <a target='_blank' href={profileContext.profileData.uri}>
-              {profileContext.profileData.id}
+            <a target='_blank' rel='noopener noreferrer' href={profile.uri}>
+              {profile.id}
             </a>
           </p>
-          <p>followers: {profileContext.profileData.followers.total}</p>
-          {profileContext.profileData.email ? (
-            <p>email: {profileContext.profileData.email}</p>
-          ) : null}
-          {profileContext.profileData.country ? (
-            <p>country: {profileContext.profileData.country}</p>
-          ) : null}
-          {profileContext.profileData.product ? (
-            <p>product: {profileContext.profileData.product}</p>
-          ) : null}
+          <p>followers: {profile.followers.total}</p>
+          {profile.email && <p>email: {profile.email}</p>}
+          {profile.country && <p>country: {profile.country}</p>}
+          {profile.product && <p>product: {profile.product}</p>}
         </div>
       </div>
     )
