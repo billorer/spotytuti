@@ -21,7 +21,7 @@ const Search = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (text === '' || type === '') {
+    if (text === '' || type === '' || limit > 50 || limit <= 0) {
       M.toast({ html: 'Please enter the required fields' });
     } else {
       setCurrentPage(1);
@@ -78,6 +78,7 @@ const Search = () => {
               <option value={types.artist}>Artist</option>
               <option value={types.album}>Album</option>
             </select>
+            <label>Select type</label>
           </div>
           <div className='input-field'>
             <input
@@ -86,8 +87,11 @@ const Search = () => {
               className='validate'
               placeholder='Limit...'
               value={limit}
+              min='1'
+              max='50'
               onChange={(e) => setLimit(e.target.value)}
             />
+            <label htmlFor='limit'>Select item limit (max 50)</label>
           </div>
           <div className='input-field'>
             <select
@@ -105,6 +109,7 @@ const Search = () => {
               <option value={40}>40</option>
               <option value={50}>50</option>
             </select>
+            <label>Select page limit</label>
           </div>
           <div className='input-field'>
             <input
