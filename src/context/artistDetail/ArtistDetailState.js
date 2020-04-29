@@ -4,14 +4,14 @@ import artistDetailReducer from './artistDetailReducer';
 import ArtistDetailContext from './artistDetailContext';
 import { ARTISTDETAIL_SUCCESS, ARTISTDETAIL_FAIL } from '../types';
 
-const ArtistDetailState = (props) => {
+const ArtistDetailState = props => {
   const initialState = {
-    artistData: null,
+    artistData: null
   };
 
   const [state, dispatch] = useReducer(artistDetailReducer, initialState);
 
-  const artist = async (artistId) => {
+  const artist = async artistId => {
     try {
       const res = await axios.get(`/api/artists/${artistId}`);
       dispatch({ type: ARTISTDETAIL_SUCCESS, payload: res.data });
@@ -24,7 +24,7 @@ const ArtistDetailState = (props) => {
     <ArtistDetailContext.Provider
       value={{
         artistData: state.artistData,
-        artist,
+        artist
       }}
     >
       {props.children}

@@ -5,12 +5,12 @@ export default (state, action) => {
     case PROFILE_SUCCESS:
       return {
         ...state,
-        profileData: action.payload,
+        profileData: action.payload
       };
     case PROFILE_FAIL:
       return {
         ...state,
-        profileData: null,
+        profileData: null
       };
     default:
       return state;

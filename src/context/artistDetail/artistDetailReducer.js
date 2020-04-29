@@ -5,12 +5,12 @@ export default (state, action) => {
     case ARTISTDETAIL_SUCCESS:
       return {
         ...state,
-        artistData: action.payload,
+        artistData: action.payload
       };
     case ARTISTDETAIL_FAIL:
       return {
         ...state,
-        artistData: null,
+        artistData: null
       };
     default:
       return state;

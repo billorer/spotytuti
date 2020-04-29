@@ -4,9 +4,9 @@ import profileReducer from './profileReducer';
 import ProfileContext from './profileContext';
 import { PROFILE_SUCCESS, PROFILE_FAIL } from '../types';
 
-const ProfileState = (props) => {
+const ProfileState = props => {
   const initialState = {
-    profileData: null,
+    profileData: null
   };
 
   const [state, dispatch] = useReducer(profileReducer, initialState);
@@ -24,7 +24,7 @@ const ProfileState = (props) => {
     <ProfileContext.Provider
       value={{
         profileData: state.profileData,
-        profile,
+        profile
       }}
     >
       {props.children}

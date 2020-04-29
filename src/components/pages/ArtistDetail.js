@@ -15,23 +15,18 @@ const ArtistDetail = props => {
 
   return (
     artistDetailContext.artistData && (
-      <div className='row valign-wrapper'>
-      <div className='col s3'>
-        <img
-          src={artist.images[0] && artist.images[0].url}
-          alt={artist.name}
-          className='circle responsive-img'
-        />
+      <div className="row valign-wrapper">
+        <div className="col s3">
+          <img src={artist.images[0] && artist.images[0].url} alt={artist.name} className="circle responsive-img" />
+        </div>
+        <div className="col s9">
+          <h1>{artist.name}</h1>
+          <p>genres: {artist.genres}</p>
+          <p>followers: {artist.followers.total}</p>
+          <p>popularity: {artist.popularity}</p>
+          <a href={artist.uri}>more about {artist.name}&nbsp;</a>
+        </div>
       </div>
-      <div className='col s9'>
-        <h1>{artist.name}</h1>
-        <p>genres: {artist.genres}</p>
-        <p>followers: {artist.followers.total}</p>
-        <p>popularity: {artist.popularity}</p>
-        <a href={artist.uri}>more about {artist.name}&nbsp;
-        </a>
-      </div>
-    </div>
     )
   );
 };
