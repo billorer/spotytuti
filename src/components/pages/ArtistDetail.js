@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import ArtistDetailContext from '../../context/artistDetail/artistDetailContext';
 
 const ArtistDetail = props => {
@@ -24,7 +25,12 @@ const ArtistDetail = props => {
           <p>genres: {artist.genres}</p>
           <p>followers: {artist.followers.total}</p>
           <p>popularity: {artist.popularity}</p>
-          <a href={artist.uri}>more about {artist.name}&nbsp;</a>
+          <p>
+            <a href={artist.uri}>more about {artist.name}&nbsp;</a>
+          </p>
+          <div>
+            <Link to={`/artist/${artistId}/discography`} className="btn waves-effect waves-light">diszko</Link>
+          </div>
         </div>
       </div>
     )
