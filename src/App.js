@@ -11,6 +11,7 @@ import About from './components/pages/About';
 import Search from './components/pages/Search/Search';
 import Profile from './components/pages/Profile';
 import ArtistDetail from './components/pages/ArtistDetail';
+import ArtistDiscography from './components/pages/ArtistDiscography';
 
 import setAuthToken from './utils/setAuthToken';
 
@@ -19,6 +20,7 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 import Navbar from './components/layout/Navbar';
 import ProfileState from './context/profile/ProfileState';
 import ArtistDetailState from './context/artistDetail/ArtistDetailState';
+import ArtistDiscographyState from './context/artistDiscography/ArtistDiscographyState';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -34,22 +36,25 @@ const App = () => {
       <ProfileState>
         <SearchState>
           <ArtistDetailState>
-            <Router>
-              <Fragment>
-                <Navbar></Navbar>
-                <div className="container">
-                  <Switch>
-                    <PrivateRoute exact path="/" component={Home} />
-                    <Route exact path="/authenticate" component={Authenticate} />
-                    <Route exact path="/about" component={About} />
-                    <PrivateRoute exact path="/search" component={Search} />
-                    <PrivateRoute exact path="/artist/:artistId" component={ArtistDetail} />
-                    <PrivateRoute exact path="/profile" component={Profile} />
-                    <Redirect to="/" />
-                  </Switch>
-                </div>
-              </Fragment>
-            </Router>
+            <ArtistDiscographyState>
+              <Router>
+                <Fragment>
+                  <Navbar></Navbar>
+                  <div className="container">
+                    <Switch>
+                      <PrivateRoute exact path="/" component={Home} />
+                      <Route exact path="/authenticate" component={Authenticate} />
+                      <Route exact path="/about" component={About} />
+                      <PrivateRoute exact path="/search" component={Search} />
+                      <PrivateRoute exact path="/artist/:artistId" component={ArtistDetail} />
+                      <PrivateRoute exact path="/artist/:artistId/discography" component={ArtistDiscography} />
+                      <PrivateRoute exact path="/profile" component={Profile} />
+                      <Redirect to="/" />
+                    </Switch>
+                  </div>
+                </Fragment>
+              </Router>
+            </ArtistDiscographyState>
           </ArtistDetailState>
         </SearchState>
       </ProfileState>
