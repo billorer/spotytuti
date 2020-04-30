@@ -8,7 +8,6 @@ const ArtistDiscographyState = props => {
   const initialState = {
     discographyData: null
   };
-  console.log('hebawebaewb')
 
   const [state, dispatch] = useReducer(artistDiscographyReducer, initialState);
 
@@ -16,7 +15,6 @@ const ArtistDiscographyState = props => {
     try {
       const res = await axios.get(`/api/artists/${artistId}/albums`);
       dispatch({ type: ARTISTDISCOGRAPHY_SUCCESS, payload: res.data });
-      console.log(res.data)
     } catch (error) {
       dispatch({ type: ARTISTDISCOGRAPHY_FAIL });
     }

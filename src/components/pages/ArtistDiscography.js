@@ -4,17 +4,36 @@ import ArtistDiscographyContext from '../../context/artistDiscography/artistDisc
 const ArtistDiscography = props => {
   const artistDiscographyContext = useContext(ArtistDiscographyContext);
   const artistId = props.match.params.artistId;
-  console.log('disco context', artistDiscographyContext);
 
   useEffect(() => {
     artistDiscographyContext.discography(artistId);
   }, []);
 
   return (
-    <div>
-      <h3>diszko diszko party</h3>
-    </div>
-  )
-}
+    artistDiscographyContext.discographyData && (
+      <div>
+        <h3>Discography</h3>
+        <div className="row">
+          {artistDiscographyContext.discographyData.map(album => (
+            <div key={album.id} className="col s12 m6">
+              <div className="card">
+                <div className="card-image">
+                  <img src={album.images[0].url} />
+                  <span className="card-title">{album.name}</span>
+                </div>
+                <div className="card-content">
+                  <p>Release date: {album.release_date}</p>
+                </div>
+                <div className="card-action">
+                  <a href={album.uri}>Check out the album</a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  );
+};
 
 export default ArtistDiscography;

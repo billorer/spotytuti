@@ -6,8 +6,6 @@ const ArtistDetail = props => {
   const artistDetailContext = useContext(ArtistDetailContext);
   const artistId = props.match.params.artistId;
   const artist = { ...artistDetailContext.artistData };
-  console.log(artistId);
-  console.log('artistdetail context', artistDetailContext);
 
   useEffect(() => {
     artistDetailContext.artist(artistId);
