@@ -1,4 +1,4 @@
-import React, { useContext, useState, Fragment } from 'react';
+import React, { useContext, useState, Fragment, useEffect } from 'react';
 import SearchContext from '../../../context/search/searchContext';
 
 import types from './types';
@@ -8,7 +8,7 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 
 const Search = () => {
   const [text, setText] = useState('');
-  const [type, setType] = useState('');
+  const [type, setType] = useState(types.track);
   const [limit, setLimit] = useState(10);
   const [offset, setOffset] = useState(0);
   const [pageLimit, setPageLimit] = useState(10);
@@ -18,16 +18,28 @@ const Search = () => {
 
   const { clearSearch, search, items, selectedType } = searchContext;
 
+  useEffect(() => {
+    // Otherwise the materialize select is overlapped or hidden
+    M.FormSelect.init(document.querySelectorAll('select'));
+  }, []);
+
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (text === '' || type === '' || limit > 50 || limit <= 0) {
+    if (isSearchDisabled()) {
       M.toast({ html: 'Please enter the required fields' });
     } else {
-      setCurrentPage(1);
-      setOffset(0);
-      search(text, type, limit, offset);
+      searchFor();
     }
+  };
+
+  const isSearchDisabled = () =>
+    text === '' || type === '' || limit > 50 || limit <= 0;
+
+  const searchFor = () => {
+    setCurrentPage(1);
+    setOffset(0);
+    search(text, type, limit, offset);
   };
 
   const previousPage = () => {
@@ -60,20 +72,20 @@ const Search = () => {
               className='validate'
               placeholder='Search for...'
               value={text}
-              onChange={(e) => setText(e.target.value)}
+              onChange={(e) => {
+                setText(e.target.value);
+                !isSearchDisabled() && searchFor();
+              }}
               required
             />
           </div>
           <div className='input-field'>
             <select
               className='validate'
-              value={type}
+              value={types.track}
               onChange={(e) => setType(e.target.value)}
               required
             >
-              <option value='' disabled>
-                Choose type
-              </option>
               <option value={types.track}>Track</option>
               <option value={types.artist}>Artist</option>
               <option value={types.album}>Album</option>
