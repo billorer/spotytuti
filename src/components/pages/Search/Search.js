@@ -104,10 +104,18 @@ const Search = () => {
                 Select page limit
               </option>
               <option value={10}>10</option>
-              <option value={20}>20</option>
-              <option value={30}>30</option>
-              <option value={40}>40</option>
-              <option value={50}>50</option>
+              <option value={20} disabled={limit < 10}>
+                20
+              </option>
+              <option value={30} disabled={limit < 20}>
+                30
+              </option>
+              <option value={40} disabled={limit < 30}>
+                40
+              </option>
+              <option value={50} disabled={limit < 40}>
+                50
+              </option>
             </select>
             <label>Select page limit</label>
           </div>
