@@ -1,5 +1,10 @@
 import React, { Fragment, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from 'react-router-dom';
 import './App.css';
 import AuthState from './context/auth/AuthState';
 import SearchState from './context/search/SearchState';
@@ -32,33 +37,51 @@ const App = () => {
     M.AutoInit();
   });
   return (
-    <AuthState>
-      <ProfileState>
-        <SearchState>
-          <ArtistDetailState>
-            <ArtistDiscographyState>
-              <Router>
-                <Fragment>
-                  <Navbar></Navbar>
-                  <div className="container">
-                    <Switch>
-                      <PrivateRoute exact path="/" component={Home} />
-                      <Route exact path="/authenticate" component={Authenticate} />
-                      <Route exact path="/about" component={About} />
-                      <PrivateRoute exact path="/search" component={Search} />
-                      <PrivateRoute exact path="/artist/:artistId" component={ArtistDetail} />
-                      <PrivateRoute exact path="/artist/:artistId/discography" component={ArtistDiscography} />
-                      <PrivateRoute exact path="/profile" component={Profile} />
-                      <Redirect to="/" />
-                    </Switch>
-                  </div>
-                </Fragment>
-              </Router>
-            </ArtistDiscographyState>
-          </ArtistDetailState>
-        </SearchState>
-      </ProfileState>
-    </AuthState>
+    <React.StrictMode>
+      <AuthState>
+        <ProfileState>
+          <SearchState>
+            <ArtistDetailState>
+              <ArtistDiscographyState>
+                <Router>
+                  <Fragment>
+                    <Navbar></Navbar>
+                    <div className='container'>
+                      <Switch>
+                        <PrivateRoute exact path='/' component={Home} />
+                        <Route
+                          exact
+                          path='/authenticate'
+                          component={Authenticate}
+                        />
+                        <Route exact path='/about' component={About} />
+                        <PrivateRoute exact path='/search' component={Search} />
+                        <PrivateRoute
+                          exact
+                          path='/artist/:artistId'
+                          component={ArtistDetail}
+                        />
+                        <PrivateRoute
+                          exact
+                          path='/artist/:artistId/discography'
+                          component={ArtistDiscography}
+                        />
+                        <PrivateRoute
+                          exact
+                          path='/profile'
+                          component={Profile}
+                        />
+                        <Redirect to='/' />
+                      </Switch>
+                    </div>
+                  </Fragment>
+                </Router>
+              </ArtistDiscographyState>
+            </ArtistDetailState>
+          </SearchState>
+        </ProfileState>
+      </AuthState>
+    </React.StrictMode>
   );
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const Track = (props) => {
-  const { items } = props;
+const Track = ({ items }) => {
   return (
     <table className='highlight'>
       <thead>
@@ -26,6 +26,10 @@ const Track = (props) => {
       </tbody>
     </table>
   );
+};
+
+Track.propTypes = {
+  items: PropTypes.array.isRequired,
 };
 
 export default Track;

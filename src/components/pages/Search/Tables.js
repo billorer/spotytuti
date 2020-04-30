@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 
 import Track from './tables/Track';
 import Artist from './tables/Artist';
@@ -6,9 +7,7 @@ import Album from './tables/Album';
 
 import types from './types';
 
-const Tables = (props) => {
-  const { items, selectedType, pageLimit, offset } = props;
-
+const Tables = ({ items, selectedType, pageLimit, offset }) => {
   const filteredItems = items.filter(
     (item, index) => index >= offset && index < offset + pageLimit
   );
@@ -27,6 +26,13 @@ const Tables = (props) => {
         </Fragment>
       );
   }
+};
+
+Tables.propTypes = {
+  items: PropTypes.array.isRequired,
+  selectedType: PropTypes.string.isRequired,
+  pageLimit: PropTypes.number.isRequired,
+  offset: PropTypes.number.isRequired,
 };
 
 export default Tables;

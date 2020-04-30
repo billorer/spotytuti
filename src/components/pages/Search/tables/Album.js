@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const Album = (props) => {
-  const { items } = props;
+const Album = ({ items }) => {
   return (
     <table className='highlight'>
       <thead>
@@ -24,6 +24,10 @@ const Album = (props) => {
       </tbody>
     </table>
   );
+};
+
+Album.propTypes = {
+  items: PropTypes.array.isRequired,
 };
 
 export default Album;
